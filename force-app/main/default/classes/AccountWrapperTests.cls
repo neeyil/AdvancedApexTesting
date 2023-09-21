@@ -39,11 +39,11 @@ public class AccountWrapperTests {
   @isTest
   static void isHighPriority() {
     // WHEN
-    Account acct = [SELECT Id FROM Account LIMIT 1];
+    Account acct = [SELECT Id FROM Account WHERE Name = 'ACME' LIMIT 1];
     AccountWrapper acctWrapper = new AccountWrapper(acct);
 
     // WHEN
-    Account acct1 = [SELECT Id FROM Account LIMIT 1];
+    Account acct1 = [SELECT Id FROM Account WHERE Name = 'ACME1' LIMIT 1];
     AccountWrapper acctWrapper1 = new AccountWrapper(acct1);
 
     // THEN
@@ -51,8 +51,9 @@ public class AccountWrapperTests {
     Assert.areEqual(acctWrapper.isHighPriority(), false, 'Expected to false');
     // Test.stopTest();
 
+    // // THEN
     // Test.startTest();
-    // Assert.areEqual(acctWrapper1.isHighPriority(), false, 'Expected to false');
+    Assert.areEqual(acctWrapper1.isHighPriority(), true, 'Expected to true');
     Test.stopTest();
   }
 
